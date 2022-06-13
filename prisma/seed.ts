@@ -40,6 +40,33 @@ async function seed() {
     },
   });
 
+  const tables = [
+    {
+      slug: "table-1",
+      title: "table1",
+    },
+    {
+      slug: "table-2",
+      title: "table2",
+    },
+    {
+      slug: "table-3",
+      title: "table3",
+    },
+    {
+      slug: "table-4",
+      title: "table4",
+    },
+  ];
+
+  for (const table of tables) {
+    await prisma.table.upsert({
+      where: { slug: table.slug },
+      update: table,
+      create: table,
+    });
+  }
+
   console.log(`Database has been seeded. 🌱`);
 }
 
