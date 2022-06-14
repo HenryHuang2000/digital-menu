@@ -42,28 +42,52 @@ async function seed() {
 
   const tables = [
     {
-      slug: "table-1",
+      id: "table-1",
       title: "table1",
     },
     {
-      slug: "table-2",
+      id: "table-2",
       title: "table2",
     },
     {
-      slug: "table-3",
+      id: "table-3",
       title: "table3",
     },
     {
-      slug: "table-4",
+      id: "table-4",
       title: "table4",
     },
   ];
 
   for (const table of tables) {
     await prisma.table.upsert({
-      where: { slug: table.slug },
+      where: { id: table.id },
       update: table,
       create: table,
+    });
+  }
+
+  const menuItems = [
+    {
+      name: "Garlic Bread",
+      price: 7
+    },
+    {
+      name: "Rump Steak",
+      price: 25
+    },
+    {
+      name: "Fish and Chips",
+      price: 21.50
+    },
+    {
+      name: "Seafood Basket",
+      price: 26.50
+    }
+  ]
+  for (const menuItem of menuItems) {
+    await prisma.menuItem.create({
+      data: menuItem
     });
   }
 
