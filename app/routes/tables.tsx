@@ -28,12 +28,12 @@ export default function TablesPage() {
         ) : (
           <ol>
             {tables.map((table) => (
-              <li key={table.slug}>
+              <li key={table.id}>
                 <NavLink
                   className={({ isActive }) =>
                     `block border-b p-4 text-xl ${isActive ? "bg-white" : ""}`
                   }
-                  to={table.slug}
+                  to={table.id}
                 >
                   {table.title}
                 </NavLink>
