@@ -1,10 +1,9 @@
-import type { LoaderFunction, ActionFunction} from "@remix-run/node";
-import { redirect } from "@remix-run/node";
+import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { Form, useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
 import { getMenuItems } from "~/models/menu.server";
-import { createOrder } from "~/models/order.server";
+import { createOrder } from "~/models/table.server";
 
 type LoaderData = {
   tableId: string
