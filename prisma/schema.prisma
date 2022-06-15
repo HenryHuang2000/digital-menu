@@ -39,7 +39,7 @@ model Table {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  menuItems Order[]
+  orders    MenuItem[]
 }
 
 model MenuItem {
@@ -50,16 +50,5 @@ model MenuItem {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  tables    Order[]
-}
-
-model Order {
-  tableId    String
-  table      Table    @relation(fields: [tableId], references: [id], onDelete: Cascade)
-  menuItemId String
-  menuItem   MenuItem @relation(fields: [menuItemId], references: [id], onDelete: Cascade)
-
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-  @@id([tableId, menuItemId])
+  tables    Table[]
 }

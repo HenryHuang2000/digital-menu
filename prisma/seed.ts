@@ -10,6 +10,8 @@ async function seed() {
   await prisma.user.delete({ where: { email } }).catch(() => {
     // no worries if it doesn't exist yet
   });
+  // Delete all existing menu items
+  await prisma.menuItem.deleteMany();
 
   const hashedPassword = await bcrypt.hash("racheliscool", 10);
 

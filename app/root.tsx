@@ -59,7 +59,7 @@ export default function App() {
               Tables
             </Link>
             {user ? <Link 
-              to="/notes"
+              to="/orders"
               className="text-base font-medium text-gray-500 hover:text-gray-900"
             >
               Orders
