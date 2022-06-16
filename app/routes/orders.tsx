@@ -43,7 +43,7 @@ export default function OrdersPage() {
                     }
                     to={table.id}
                   >
-                    {table.title}
+                    {table.label}
                   </NavLink>
                 </li>
               ))}

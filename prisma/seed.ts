@@ -4,63 +4,37 @@ import bcrypt from "bcryptjs";
 const prisma = new PrismaClient();
 
 async function seed() {
-  const email = "rachel@remix.run";
 
-  // cleanup the existing database
-  await prisma.user.delete({ where: { email } }).catch(() => {
-    // no worries if it doesn't exist yet
-  });
-  // Delete all existing menu items
-  await prisma.menuItem.deleteMany();
-
-  const hashedPassword = await bcrypt.hash("racheliscool", 10);
-
-  const user = await prisma.user.create({
+  // User setup
+  await prisma.user.deleteMany();
+  await prisma.user.create({
     data: {
-      email,
+      email: "rachel@remix.run",
       password: {
         create: {
-          hash: hashedPassword,
+          hash: await bcrypt.hash("racheliscool", 10),
         },
       },
     },
   });
 
-  await prisma.note.create({
-    data: {
-      title: "My first note",
-      body: "Hello, world!",
-      userId: user.id,
-    },
+  // Restaurant setup
+  const defaultRestaurant = {
+    id: "maccas",
+    name: "maccas"
+  }
+  await prisma.restaurant.upsert({
+    where: { id: defaultRestaurant.id },
+    update: defaultRestaurant,
+    create: defaultRestaurant
   });
 
-  await prisma.note.create({
-    data: {
-      title: "My second note",
-      body: "Hello, world!",
-      userId: user.id,
-    },
-  });
-
-  const tables = [
-    {
-      id: "table-1",
-      title: "table1",
-    },
-    {
-      id: "table-2",
-      title: "table2",
-    },
-    {
-      id: "table-3",
-      title: "table3",
-    },
-    {
-      id: "table-4",
-      title: "table4",
-    },
-  ];
-
+  // Table setup (Create 5 tables).
+  const tables = Array.from({length: 5}, (_, i) => ({
+    id: `table-${i + 1}`,
+    label: `table ${i + 1}`,
+    restaurantId: defaultRestaurant.id
+  }));
   for (const table of tables) {
     await prisma.table.upsert({
       where: { id: table.id },
@@ -69,20 +43,26 @@ async function seed() {
     });
   }
 
+  // Menu setup.
+  await prisma.menuItem.deleteMany();
   const menuItems = [
     {
+      restaurantId: defaultRestaurant.id,
       name: "Garlic Bread",
       price: 7
     },
     {
+      restaurantId: defaultRestaurant.id,
       name: "Rump Steak",
       price: 25
     },
     {
+      restaurantId: defaultRestaurant.id,
       name: "Fish and Chips",
       price: 21.50
     },
     {
+      restaurantId: defaultRestaurant.id,
       name: "Seafood Basket",
       price: 26.50
     }

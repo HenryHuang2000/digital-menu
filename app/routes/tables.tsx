@@ -35,7 +35,7 @@ export default function TablesPage() {
                   }
                   to={table.id}
                 >
-                  {table.title}
+                  {table.label}
                 </NavLink>
               </li>
             ))}

@@ -25,11 +25,9 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 export default function TableOrdersPage() {
   const data = useLoaderData<LoaderData>();
 
-  console.log('tableWithOrders2', data.tableWithOrders.title);
-
   return (
     <div>
-      <h3 className="text-2xl font-bold">{data.tableWithOrders.title}</h3>
+      <h3 className="text-2xl font-bold">{data.tableWithOrders.label}</h3>
       <ul>
         {data.tableWithOrders.orders.map((order) => (
           <li key={order.id}>
