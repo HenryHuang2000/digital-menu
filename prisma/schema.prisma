@@ -12,7 +12,6 @@ model User {
   email     String    @unique
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
-  notes     Note[]
   password  Password?
 }
 
@@ -22,33 +21,40 @@ model Password {
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-model Note {
-  id        String   @id @default(cuid())
-  title     String
-  body      String
+model Restaurant {
+  id        String @id
+  name      String
+
+  tables    Table[]
+  menu      MenuItem[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  userId    String
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Table {
-  id        String   @id
-  title     String
+  id           String     @id
+  label        String
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  restaurantId String
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
 
-  orders    MenuItem[]
+  orders       MenuItem[]
+
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
 }
 
 model MenuItem {
-  id        String   @id @default(cuid())
-  name      String
-  price     Decimal
+  id           String     @id @default(cuid())
+  name         String
+  price        Decimal
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  restaurantId String
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
 
-  tables    Table[]
+  tables       Table[]
+
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
 }
