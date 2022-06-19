@@ -3,7 +3,7 @@ import { json } from "@remix-run/node";
 import { Form, useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
 import type { MenuItem } from "~/models/restaurant.server";
-import { getMenuItems } from "~/models/restaurant.server";
+import { getMenu } from "~/models/restaurant.server";
 import type { Table } from "~/models/table.server";
 import { createOrder, getTable } from "~/models/table.server";
 
@@ -17,7 +17,7 @@ export const loader: LoaderFunction = async ({ params }) => {
   invariant(params.tableId, "table id is required");
   invariant(params.restaurantId, "restaurant id is required");
 
-  const menu = await getMenuItems({ id: params.restaurantId });
+  const menu = await getMenu({ id: params.restaurantId });
   invariant(menu, "menu could not be found");
 
   const table = await getTable({ id: params.tableId });

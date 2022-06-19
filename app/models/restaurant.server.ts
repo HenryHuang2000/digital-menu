@@ -13,7 +13,7 @@ export async function getRestaurant({ id }: Pick<Restaurant, "id">) {
   });
 }
 
-export async function getMenuItems({ id }: Pick<Restaurant, "id">) {
+export async function getMenu({ id }: Pick<Restaurant, "id">) {
   return prisma.restaurant.findUnique({
     where: { id },
     select: { menu: true }
