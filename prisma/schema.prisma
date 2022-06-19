@@ -10,9 +10,12 @@ datasource db {
 model User {
   id        String    @id @default(cuid())
   email     String    @unique
+  password  Password?
+
+  restaurants Restaurant[]
+
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
-  password  Password?
 }
 
 model Password {
@@ -24,6 +27,9 @@ model Password {
 model Restaurant {
   id        String @id @default(cuid())
   name      String
+
+  userId    String
+  user      User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   tables    Table[]
   menu      MenuItem[]
@@ -37,7 +43,7 @@ model Table {
   label        String
 
   restaurantId String
-  restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
 
   orders       MenuItem[]
 
@@ -51,7 +57,7 @@ model MenuItem {
   price        Decimal
 
   restaurantId String
-  restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
 
   tables       Table[]
 
