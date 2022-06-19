@@ -19,58 +19,60 @@ async function seed() {
   });
 
   // Restaurant setup
-  const defaultRestaurant = {
-    id: "maccas",
-    name: "maccas"
-  }
-  await prisma.restaurant.upsert({
-    where: { id: defaultRestaurant.id },
-    update: defaultRestaurant,
-    create: defaultRestaurant
-  });
-
-  // Table setup (Create 5 tables).
-  const tables = Array.from({length: 5}, (_, i) => ({
-    id: `table-${i + 1}`,
-    label: `table ${i + 1}`,
-    restaurantId: defaultRestaurant.id
-  }));
-  for (const table of tables) {
-    await prisma.table.upsert({
-      where: { id: table.id },
-      update: table,
-      create: table,
-    });
-  }
-
-  // Menu setup.
   await prisma.menuItem.deleteMany();
-  const menuItems = [
-    {
-      restaurantId: defaultRestaurant.id,
-      name: "Garlic Bread",
-      price: 7
-    },
-    {
-      restaurantId: defaultRestaurant.id,
-      name: "Rump Steak",
-      price: 25
-    },
-    {
-      restaurantId: defaultRestaurant.id,
-      name: "Fish and Chips",
-      price: 21.50
-    },
-    {
-      restaurantId: defaultRestaurant.id,
-      name: "Seafood Basket",
-      price: 26.50
-    }
-  ]
-  for (const menuItem of menuItems) {
-    await prisma.menuItem.create({
-      data: menuItem
+  await prisma.table.deleteMany();
+  await prisma.restaurant.deleteMany();
+  const restaurants = [
+    { name: "McDonald's Rhodes" },
+    { name: "McDonald's West Ryde" },
+    { name: "McDonald's Olympic Park" },
+    { name: "McDonald's Gladesville" },
+    { name: "Burger Point" }
+  ];
+  for (const restaurant of restaurants) {
+    const { id: restaurantId } = await prisma.restaurant.create({
+      data: restaurant
     });
+
+    // Table setup (Create 5 tables).
+    const tables = Array.from({length: 5}, (_, i) => ({
+      label: `table ${i + 1}`,
+      restaurantId
+    }));
+    for (const table of tables) {
+      await prisma.table.create({
+        data: table
+      });
+    }
+
+    // Menu setup.
+    const menuItems = [
+      {
+        restaurantId,
+        name: "Garlic Bread",
+        price: 7
+      },
+      {
+        restaurantId,
+        name: "Rump Steak",
+        price: 25
+      },
+      {
+        restaurantId,
+        name: "Fish and Chips",
+        price: 21.50
+      },
+      {
+        restaurantId,
+        name: "Seafood Basket",
+        price: 26.50
+      }
+    ]
+    for (const menuItem of menuItems) {
+      await prisma.menuItem.create({
+        data: menuItem
+      });
+    }
   }
 
   console.log(`Database has been seeded. 🌱`);

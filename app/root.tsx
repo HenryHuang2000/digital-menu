@@ -25,7 +25,7 @@ export const links: LinksFunction = () => {
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
-  title: "Remix Notes",
+  title: "Digital Menu",
   viewport: "width=device-width,initial-scale=1",
 });
 
@@ -52,6 +52,12 @@ export default function App() {
         {/* Global nav bar */}
         <div className="mx-auto px-4 sm:px-6 flex justify-between items-center border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10 ">
           <div className="flex space-x-10">
+          <Link 
+              to="restaurants"
+              className="text-base font-medium text-gray-500 hover:text-gray-900"
+            >
+              Restaurants
+            </Link>
             <Link 
               to="tables"
               className="text-base font-medium text-gray-500 hover:text-gray-900"
