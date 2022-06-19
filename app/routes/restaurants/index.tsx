@@ -23,7 +23,7 @@ export default function RestaurantsPage() {
             key={restaurant.id}
           >
             <Link 
-              className={"p-10"}
+              className={"w-full p-10"}
               to={restaurant.id}
             >
               {restaurant.name}

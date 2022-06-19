@@ -2,21 +2,30 @@ import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { Form, useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
-import { getMenuItems } from "~/models/menu.server";
-import { createOrder } from "~/models/table.server";
+import type { MenuItem } from "~/models/restaurant.server";
+import { getMenuItems } from "~/models/restaurant.server";
+import type { Table } from "~/models/table.server";
+import { createOrder, getTable } from "~/models/table.server";
 
 type LoaderData = {
-  tableId: string
-  menuItems: Awaited<ReturnType<typeof getMenuItems>>;
+  table: Table;
+  menu: MenuItem[];
 }
 
 export const loader: LoaderFunction = async ({ params }) => {
 
-  invariant(params.tableId, "params.slug is required");
+  invariant(params.tableId, "table id is required");
+  invariant(params.restaurantId, "restaurant id is required");
+
+  const menu = await getMenuItems({ id: params.restaurantId });
+  invariant(menu, "menu could not be found");
+
+  const table = await getTable({ id: params.tableId });
+  invariant(table, "table could not be found");
 
   return json<LoaderData>({ 
-    tableId: params.tableId,
-    menuItems: await getMenuItems()
+    table,
+    menu: menu.menu
   });
 };
 
@@ -33,20 +42,20 @@ export const action: ActionFunction = async ({ request }) => {
 };
 
 export default function TableSlug() {
-  const { tableId, menuItems } = useLoaderData<LoaderData>();
+  const { table, menu } = useLoaderData<LoaderData>();
   return (
-    <main className="mx-auto max-w-4xl">
-      <h1 className="my-6 border-b-2 text-center text-3xl">
-        {tableId}
+    <main className="flex flex-col items-start mx-10">
+      <h1 className="my-6 text-center text-3xl">
+        {table.label}
       </h1>
       <ul>
-        {menuItems.map((menuItem) => (
+        {menu.map((menuItem) => (
           <li key={menuItem.id}>
             {menuItem.name}
             {` $${menuItem.price}`}
-            <Form method="post">
+            <Form method="post" replace={true} >
               <input type="hidden" name="item_id" value={menuItem.id} />
-              <input type="hidden" name="table_id" value={tableId} />
+              <input type="hidden" name="table_id" value={table.id} />
               <button type="submit" className="text-blue-600 underline">
                 Order
               </button>

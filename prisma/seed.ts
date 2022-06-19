@@ -9,10 +9,10 @@ async function seed() {
   await prisma.user.deleteMany();
   await prisma.user.create({
     data: {
-      email: "rachel@remix.run",
+      email: "admin@remix.run",
       password: {
         create: {
-          hash: await bcrypt.hash("racheliscool", 10),
+          hash: await bcrypt.hash("admin", 10),
         },
       },
     },

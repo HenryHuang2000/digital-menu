@@ -58,18 +58,6 @@ export default function App() {
             >
               Restaurants
             </Link>
-            <Link 
-              to="tables"
-              className="text-base font-medium text-gray-500 hover:text-gray-900"
-            >
-              Tables
-            </Link>
-            {user ? <Link 
-              to="/orders"
-              className="text-base font-medium text-gray-500 hover:text-gray-900"
-            >
-              Orders
-            </Link> : null}
           </div>
           <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
             {user ? (
