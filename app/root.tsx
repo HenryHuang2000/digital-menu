@@ -50,11 +50,11 @@ export default function App() {
       <body className="h-full antialiased text-gray-900">
 
         {/* Global nav bar */}
-        <nav className="mx-auto px-4 sm:px-6 flex justify-between items-center border-b-2 border-gray-100 py-6">
+        <nav className="mx-auto px-4 sm:px-8 py-6 flex justify-between items-center border-b-2 border-gray-100 ">
           <div>
           <Link 
               to="restaurants"
-              className="text-base font-medium text-gray-500 hover:text-gray-900"
+              className="font-medium text-gray-500 hover:text-gray-900"
             >
               Restaurants
             </Link>
@@ -66,13 +66,13 @@ export default function App() {
                 <div className="sm:hidden">
                   <UserDropdown />
                 </div>
-                <div className="hidden sm:block">
-                  <Link to="/login" className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">
+                <div className="hidden sm:block space-x-6">
+                  <Link to="/login" className="inline-block px-4 py-2 rounded-md font-medium  text-gray-500 hover:text-gray-900">
                     Sign in
                   </Link>
                   <Link
                     to="/join"
-                    className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
+                    className="inline-block px-4 py-2 rounded-md shadow-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700"
                   >
                     Sign up
                   </Link>
