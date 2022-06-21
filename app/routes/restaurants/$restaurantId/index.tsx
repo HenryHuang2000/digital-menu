@@ -1,5 +1,4 @@
 import { Link } from "@remix-run/react";
-import type { LoaderFunction } from "@remix-run/node";
 import { useOptionalUser } from "~/utils";
 
 // export const loader: LoaderFunction = async ({ params }) => {

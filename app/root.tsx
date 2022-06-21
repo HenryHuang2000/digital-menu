@@ -1,24 +1,23 @@
 import type {
   LinksFunction,
   LoaderFunction,
-  MetaFunction,
+  MetaFunction
 } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import {
-  Form,
   Link,
   Links,
   LiveReload,
   Meta,
   Outlet,
   Scripts,
-  ScrollRestoration,
+  ScrollRestoration
 } from "@remix-run/react";
 
-import tailwindStylesheetUrl from "./styles/tailwind.css";
-import { getUser } from "./session.server";
-import { useOptionalUser } from "./utils";
 import { UserDropdown } from "./components/UserDropdown";
+import { getUser } from "./session.server";
+import tailwindStylesheetUrl from "./styles/tailwind.css";
+import { useOptionalUser } from "./utils";
 
 export const links: LinksFunction = () => {
   return [{ rel: "stylesheet", href: tailwindStylesheetUrl }];
