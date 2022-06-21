@@ -1,6 +1,7 @@
 import type { LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { Link, NavLink, Outlet, useLoaderData } from "@remix-run/react";
+import invariant from "tiny-invariant";
 
 import { getTables } from "~/models/table.server";
 import { requireUserId } from "~/session.server";
@@ -10,9 +11,12 @@ type LoaderData = {
   tables: Awaited<ReturnType<typeof getTables>>;
 };
 
-export const loader: LoaderFunction = async ({ request }) => {
+export const loader: LoaderFunction = async ({ request, params }) => {
   await requireUserId(request);
-  const tables = await getTables();
+
+  invariant(params.restaurantId, "restaurnt id is required");
+  const tables = await getTables({ restaurantId: params.restaurantId });
+
   return json<LoaderData>({ tables });
 };
 

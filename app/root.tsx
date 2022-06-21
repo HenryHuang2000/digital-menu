@@ -25,7 +25,7 @@ export const links: LinksFunction = () => {
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
-  title: "Remix Notes",
+  title: "Digital Menu",
   viewport: "width=device-width,initial-scale=1",
 });
 
@@ -52,18 +52,12 @@ export default function App() {
         {/* Global nav bar */}
         <div className="mx-auto px-4 sm:px-6 flex justify-between items-center border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10 ">
           <div className="flex space-x-10">
-            <Link 
-              to="tables"
+          <Link 
+              to="restaurants"
               className="text-base font-medium text-gray-500 hover:text-gray-900"
             >
-              Tables
+              Restaurants
             </Link>
-            {user ? <Link 
-              to="/orders"
-              className="text-base font-medium text-gray-500 hover:text-gray-900"
-            >
-              Orders
-            </Link> : null}
           </div>
           <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
             {user ? (
