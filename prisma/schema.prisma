@@ -55,6 +55,8 @@ model MenuItem {
   id           String     @id @default(cuid())
   name         String
   price        Decimal
+  imageUrl     String?
+  description  String?
 
   restaurantId String
   restaurant   Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)

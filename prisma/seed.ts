@@ -65,7 +65,8 @@ async function seed() {
       {
         restaurantId,
         name: "Garlic Bread",
-        price: 7
+        price: 7,
+        imageUrl: "https://res.cloudinary.com/dbxuemovn/image/upload/v1655867391/digital-menu/garlic-bread_l3klls.jpg"
       },
       {
         restaurantId,
@@ -75,7 +76,9 @@ async function seed() {
       {
         restaurantId,
         name: "Fish and Chips",
-        price: 21.50
+        price: 21.50,
+        imageUrl: "https://res.cloudinary.com/dbxuemovn/image/upload/v1655867548/digital-menu/fish-and-chips_grvxnu.jpg",
+        description: "Battered barramundi with a side of thick-cut chips"
       },
       {
         restaurantId,

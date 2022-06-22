@@ -44,25 +44,35 @@ export const action: ActionFunction = async ({ request }) => {
 export default function TableSlug() {
   const { table, menu } = useLoaderData<LoaderData>();
   return (
-    <main className="flex flex-col items-start mx-10">
-      <h1 className="my-6 text-center text-3xl">
+    <main>
+      <h1 className="mx-5 text-gray-500 text-xl">
         {table.label}
       </h1>
-      <ul>
+      <menu className="mx-5 mt-8 flex flex-wrap justify-center">
         {menu.map((menuItem) => (
-          <li key={menuItem.id}>
-            {menuItem.name}
-            {` $${menuItem.price}`}
-            <Form method="post" replace={true} >
-              <input type="hidden" name="item_id" value={menuItem.id} />
-              <input type="hidden" name="table_id" value={table.id} />
-              <button type="submit" className="text-blue-600 underline">
-                Order
-              </button>
-            </Form>
+          <li key={menuItem.id} className="mr-4 mb-4 overflow-hidden rounded-xl shadow-xl border">
+            
+            <img
+              className="w-60 aspect-square object-cover"
+              src={ menuItem.imageUrl ?? "https://res.cloudinary.com/dbxuemovn/image/upload/v1655869310/digital-menu/no-image-placeholder_bg2bgm.svg" } 
+              alt={menuItem.name} 
+            />
+
+            <div className="p-4 bg-white">
+              <h4 className="font-semibold text-lg">{menuItem.name}</h4>
+              <p className="text-gray-600 text-sm">{`$${menuItem.price}`}</p>
+              
+              <Form method="post" replace={true} >
+                <input type="hidden" name="item_id" value={menuItem.id} />
+                <input type="hidden" name="table_id" value={table.id} />
+                <button type="submit" className="w-full mt-6 text-center rounded-full bg-green-300 hover:bg-green-400">
+                  Order
+                </button>
+              </Form>
+            </div>
           </li>
         ))}
-      </ul>
+      </menu>
     </main>
   );
 }
