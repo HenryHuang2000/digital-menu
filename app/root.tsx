@@ -1,22 +1,22 @@
 import type {
   LinksFunction,
   LoaderFunction,
-  MetaFunction,
+  MetaFunction
 } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import {
-  Form,
   Link,
   Links,
   LiveReload,
   Meta,
   Outlet,
   Scripts,
-  ScrollRestoration,
+  ScrollRestoration
 } from "@remix-run/react";
 
-import tailwindStylesheetUrl from "./styles/tailwind.css";
+import { UserDropdown } from "./components/UserDropdown";
 import { getUser } from "./session.server";
+import tailwindStylesheetUrl from "./styles/tailwind.css";
 import { useOptionalUser } from "./utils";
 
 export const links: LinksFunction = () => {
@@ -47,44 +47,39 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="h-full">
+      <body className="h-full antialiased text-gray-900 bg-slate-100">
 
         {/* Global nav bar */}
-        <div className="mx-auto px-4 sm:px-6 flex justify-between items-center border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10 ">
-          <div className="flex space-x-10">
+        <nav className="mx-auto px-4 sm:px-8 py-6 flex justify-between items-center bg-white border-b-2 border-gray-100 ">
+          <div>
           <Link 
               to="restaurants"
-              className="text-base font-medium text-gray-500 hover:text-gray-900"
+              className="font-medium text-gray-500 hover:text-gray-900"
             >
               Restaurants
             </Link>
           </div>
-          <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
-            {user ? (
-              <Form action="/logout" method="post">
-                <button
-                  type="submit"
-                  className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
-                >
-                  Logout
-                </button>
-              </Form>
+          {user ? (
+              <UserDropdown />
             ) : (
-              <>
-                <Link to="/login" className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">
-                  Sign in
-                </Link>
-                <Link
-                  to="/join"
-                  className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
-                >
-                  Sign up
-                </Link>
-              </>
+              <div>
+                <div className="sm:hidden">
+                  <UserDropdown />
+                </div>
+                <div className="hidden sm:block space-x-6">
+                  <Link to="/login" className="inline-block px-4 py-2 rounded-md font-medium  text-gray-500 hover:text-gray-900">
+                    Sign in
+                  </Link>
+                  <Link
+                    to="/join"
+                    className="inline-block px-4 py-2 rounded-md shadow-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700"
+                  >
+                    Sign up
+                  </Link>
+                </div>
+              </div>
             )}
-            
-          </div>
-        </div>
+        </nav>
 
         <Outlet />
         <ScrollRestoration />

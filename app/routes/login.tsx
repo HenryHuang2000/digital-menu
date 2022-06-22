@@ -45,7 +45,7 @@ export const action: ActionFunction = async ({ request }) => {
     );
   }
 
-  if (password.length < 8) {
+  if (password.length < 5) {
     return json<ActionData>(
       { errors: { password: "Password is too short" } },
       { status: 400 }
@@ -153,7 +153,7 @@ export default function LoginPage() {
             type="submit"
             className="w-full rounded bg-blue-500  py-2 px-4 text-white hover:bg-blue-600 focus:bg-blue-400"
           >
-            Log in
+            Sign in
           </button>
           <div className="flex items-center justify-between">
             <div className="flex items-center">

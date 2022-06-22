@@ -7,7 +7,7 @@ async function seed() {
 
   // User setup
   await prisma.user.deleteMany();
-  await prisma.user.create({
+  const user = await prisma.user.create({
     data: {
       email: "admin@remix.run",
       password: {
@@ -23,11 +23,26 @@ async function seed() {
   await prisma.table.deleteMany();
   await prisma.restaurant.deleteMany();
   const restaurants = [
-    { name: "McDonald's Rhodes" },
-    { name: "McDonald's West Ryde" },
-    { name: "McDonald's Olympic Park" },
-    { name: "McDonald's Gladesville" },
-    { name: "Burger Point" }
+    { 
+      name: "McDonald's Rhodes", 
+      userId: user.id 
+    },
+    { 
+      name: "McDonald's West Ryde",  
+      userId: user.id 
+    },
+    { 
+      name: "McDonald's Olympic Park", 
+      userId: user.id 
+    },
+    { 
+      name: "McDonald's Gladesville",  
+      userId: user.id 
+    },
+    { 
+      name: "Burger Point",  
+      userId: user.id
+    }
   ];
   for (const restaurant of restaurants) {
     const { id: restaurantId } = await prisma.restaurant.create({
@@ -50,7 +65,8 @@ async function seed() {
       {
         restaurantId,
         name: "Garlic Bread",
-        price: 7
+        price: 7,
+        imageUrl: "https://res.cloudinary.com/dbxuemovn/image/upload/v1655867391/digital-menu/garlic-bread_l3klls.jpg"
       },
       {
         restaurantId,
@@ -60,7 +76,9 @@ async function seed() {
       {
         restaurantId,
         name: "Fish and Chips",
-        price: 21.50
+        price: 21.50,
+        imageUrl: "https://res.cloudinary.com/dbxuemovn/image/upload/v1655867548/digital-menu/fish-and-chips_grvxnu.jpg",
+        description: "Battered barramundi with a side of thick-cut chips"
       },
       {
         restaurantId,

@@ -23,8 +23,8 @@ export const loader: LoaderFunction = async ({ params }) => {
 export default function RestaurantPage() {
   const { restaurant } = useLoaderData<LoaderData>();
   return (
-    <main className="flex flex-col justify-center">
-      <h1 className="text-4xl self-center flex-center m-5">{restaurant.name}</h1>
+    <main>
+      <h1 className="text-2xl mx-5 mt-5">{restaurant.name}</h1>
       <Outlet/>
     </main>
   );
