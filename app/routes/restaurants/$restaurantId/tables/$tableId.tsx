@@ -50,16 +50,16 @@ export default function TableSlug() {
       </h1>
       <menu className="mx-5 mt-8 flex flex-wrap justify-center">
         {menu.map((menuItem) => (
-          <li key={menuItem.id} className="mr-4 mb-4 overflow-hidden rounded-xl shadow-xl border">
+          <li key={menuItem.id} className="w-60 mr-4 mb-4 overflow-hidden rounded-xl shadow-xl border">
             
             <img
-              className="w-60 aspect-square object-cover"
+              className="aspect-square object-cover"
               src={ menuItem.imageUrl ?? "https://res.cloudinary.com/dbxuemovn/image/upload/v1655869310/digital-menu/no-image-placeholder_bg2bgm.svg" } 
               alt={menuItem.name} 
             />
 
-            <div className="p-4 bg-white">
-              <h4 className="font-semibold text-lg">{menuItem.name}</h4>
+            <div className="h-full p-4 bg-white">
+              <h4 className="font-semibold text-lg truncate">{menuItem.name}</h4>
               <p className="text-gray-600 text-sm">{`$${menuItem.price}`}</p>
               
               <Form method="post" replace={true} >

@@ -47,7 +47,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="h-full antialiased text-gray-900 bg-slate-100">
+      <body className="h-full antialiased text-gray-900 bg-gray-100">
 
         {/* Global nav bar */}
         <nav className="mx-auto px-4 sm:px-8 py-6 flex justify-between items-center bg-white border-b-2 border-gray-100 ">
