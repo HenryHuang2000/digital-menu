@@ -25,22 +25,36 @@ async function seed() {
   const restaurants = [
     { 
       name: "McDonald's Rhodes", 
+      location: "Rhodes, Sydney",
+      imageUrl: "https://res.cloudinary.com/dbxuemovn/image/upload/v1656035924/digital-menu/mcdonalds-logo-bg-red_nx7eqy.svg",
+      category: "Fast Food",
       userId: user.id 
     },
     { 
-      name: "McDonald's West Ryde",  
+      name: "McDonald's West Ryde",
+      location: "West Ryde, Sydney",
+      imageUrl: "https://res.cloudinary.com/dbxuemovn/image/upload/v1656035924/digital-menu/mcdonalds-logo-bg-red_nx7eqy.svg",
+      category: "Fast Food",
       userId: user.id 
     },
     { 
-      name: "McDonald's Olympic Park", 
+      name: "McDonald's Olympic Park",
+      location: "Olympic Park, Sydney",
+      imageUrl: "https://res.cloudinary.com/dbxuemovn/image/upload/v1656035924/digital-menu/mcdonalds-logo-bg-red_nx7eqy.svg",
+      category: "Fast Food",
       userId: user.id 
     },
     { 
-      name: "McDonald's Gladesville",  
+      name: "McDonald's Gladesville",
+      location: "Gladesville, Sydney",
+      imageUrl: "https://res.cloudinary.com/dbxuemovn/image/upload/v1656035924/digital-menu/mcdonalds-logo-bg-red_nx7eqy.svg",
+      category: "Fast Food",
       userId: user.id 
     },
     { 
-      name: "Burger Point",  
+      name: "Burger Point",
+      location: "Wentworth Point, Sydney",
+      category: "Burger",
       userId: user.id
     }
   ];
