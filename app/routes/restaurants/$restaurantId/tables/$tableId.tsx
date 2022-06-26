@@ -1,7 +1,8 @@
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { Form, useLoaderData } from "@remix-run/react";
+import { useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
+import { MenuItemCard } from "~/components/MenuItemCard";
 import type { MenuItem } from "~/models/restaurant.server";
 import { getMenu } from "~/models/restaurant.server";
 import type { Table } from "~/models/table.server";
@@ -45,31 +46,10 @@ export default function TableSlug() {
   const { table, menu } = useLoaderData<LoaderData>();
   return (
     <main>
-      <h1 className="mx-5 text-gray-500 text-xl">
-        {table.label}
-      </h1>
       <menu className="mx-5 mt-8 flex flex-wrap justify-center">
         {menu.map((menuItem) => (
-          <li key={menuItem.id} className="w-60 mr-4 mb-4 overflow-hidden rounded-xl shadow-xl border">
-            
-            <img
-              className="aspect-square object-cover"
-              src={ menuItem.imageUrl ?? "https://res.cloudinary.com/dbxuemovn/image/upload/v1655869310/digital-menu/no-image-placeholder_bg2bgm.svg" } 
-              alt={menuItem.name} 
-            />
-
-            <div className="h-full p-4 bg-white">
-              <h4 className="font-semibold text-lg truncate">{menuItem.name}</h4>
-              <p className="text-gray-600 text-sm">{`$${menuItem.price}`}</p>
-              
-              <Form method="post" replace={true} >
-                <input type="hidden" name="item_id" value={menuItem.id} />
-                <input type="hidden" name="table_id" value={table.id} />
-                <button type="submit" className="w-full mt-6 text-center rounded-full bg-green-300 hover:bg-green-400">
-                  Order
-                </button>
-              </Form>
-            </div>
+          <li key={menuItem.id}>
+            <MenuItemCard menuItem={menuItem} tableId={table.id}/>
           </li>
         ))}
       </menu>
