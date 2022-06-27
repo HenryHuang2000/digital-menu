@@ -23,18 +23,24 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 };
 
 export default function TableOrdersPage() {
-  const data = useLoaderData<LoaderData>();
+  const { tableWithOrders } = useLoaderData<LoaderData>();
 
   return (
-    <div>
-      <h3 className="text-2xl font-bold">{data.tableWithOrders.label}</h3>
-      <ul>
-        {data.tableWithOrders.orders.map((order) => (
-          <li key={order.id}>
-            {order.name}
-          </li>
-        ))}
-      </ul>
-    </div>
+    <main>
+      {tableWithOrders.orders.length ? 
+        (
+          <ul>
+            {tableWithOrders.orders.map((order) => (
+              <li key={order.id}>
+                {order.name}
+              </li>
+            ))}
+          </ul>
+        ) :
+        (
+          <span>There are no orders</span>
+        )
+      }
+    </main>
   );
 }

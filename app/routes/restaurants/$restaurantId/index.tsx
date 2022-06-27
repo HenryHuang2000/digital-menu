@@ -26,7 +26,7 @@ export default function RestaurantMenu() {
   const { menu } = useLoaderData<LoaderData>();
   return (
     <main>
-      <menu className="mx-5 mt-8 flex flex-wrap justify-center">
+      <menu className="mx-5 mt-8 flex flex-wrap">
         {menu.map((menuItem) => (
           <li key={menuItem.id}>
             <MenuItemCard menuItem={menuItem}/>
