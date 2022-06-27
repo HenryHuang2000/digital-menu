@@ -17,7 +17,7 @@ export const loader: LoaderFunction = async ({ params }) => {
   });
 };
 
-export default function RestaurantsPage() {
+export default function TablesPage() {
   const { tables } = useLoaderData<LoaderData>();
   return (
     <main className="h-full w-full flex justify-center">

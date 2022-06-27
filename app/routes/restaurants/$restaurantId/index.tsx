@@ -1,37 +1,38 @@
-import { Link } from "@remix-run/react";
-import { useOptionalUser } from "~/utils";
+import type { LoaderFunction } from "@remix-run/node";
+import { json } from "@remix-run/node";
+import { useLoaderData } from "@remix-run/react";
+import invariant from "tiny-invariant";
+import { MenuItemCard } from "~/components/MenuItemCard";
+import type { MenuItem } from "~/models/restaurant.server";
+import { getMenu } from "~/models/restaurant.server";
 
-// export const loader: LoaderFunction = async ({ params }) => {
+type LoaderData = {
+  menu: MenuItem[];
+}
 
-//   invariant(params.restaurantId, "restaurant id is required.");
-//   const restaurant = await getRestaurant({ id: params.restaurantId });
-//   invariant(restaurant, "restaurant not found.");
+export const loader: LoaderFunction = async ({ params }) => {
 
-//   return json<LoaderData>({
-//     restaurant
-//   });
-// };
+  invariant(params.restaurantId, "restaurant id is required");
 
-export default function Index() {
-  const user = useOptionalUser();
+  const menu = await getMenu({ id: params.restaurantId });
+  invariant(menu, "menu could not be found");
+
+  return json<LoaderData>({ 
+    menu: menu.menu
+  });
+};
+
+export default function RestaurantMenu() {
+  const { menu } = useLoaderData<LoaderData>();
   return (
-    <div className="m-10 box-content space-x-10">
-      <Link
-      to="tables"
-      className="p-6 text-xl bg-green-200 hover:bg-green-300 rounded"
-      >
-        View Tables
-      </Link>
-
-      { user ? 
-        <Link
-        to="orders"
-        className="p-6 text-xl bg-blue-200 hover:bg-blue-300 rounded"
-        >
-          View Orders
-        </Link> : 
-        <></>
-      }
-    </div>
+    <main>
+      <menu className="mx-5 mt-8 flex flex-wrap">
+        {menu.map((menuItem) => (
+          <li key={menuItem.id}>
+            <MenuItemCard menuItem={menuItem}/>
+          </li>
+        ))}
+      </menu>
+    </main>
   );
 }

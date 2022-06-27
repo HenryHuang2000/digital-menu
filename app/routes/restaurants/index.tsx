@@ -16,7 +16,7 @@ export default function RestaurantsPage() {
   const { restaurants } = useLoaderData<LoaderData>();
   return (
     <main>
-      <menu className="mx-5 mt-8">
+      <menu className="mx-5 my-8">
         {restaurants.map((restaurant) => (
           <li 
             className="max-w-xl mr-4 mb-4 overflow-hidden rounded-xl bg-white shadow-sm"
