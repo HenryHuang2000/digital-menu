@@ -69,7 +69,7 @@ export default function RestaurantPage() {
                       <Listbox.Option
                         key={table.id}
                         as={Link}
-                        to={`tables/${table.id}/menu`}
+                        to={`tables/${table.id}`}
                         className={({ active }) =>
                           `relative block cursor-default select-none py-2 pl-10 pr-4 ${
                             active ? 'bg-amber-100 text-amber-900' : 'text-gray-900'
