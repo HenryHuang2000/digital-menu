@@ -118,7 +118,7 @@ Now that everything is set up you can commit and push your changes to your repo.
 
 ### Connecting to your database
 
-The sqlite database lives at `/data/sqlite.db` in your deployed application. You can connect to the live database by running `fly ssh console -C database-cli`.
+The sqlite database lives at `/data/sqlite.db` in your deployed application. You can connect to the live database by running `flyctl ssh console -C database-cli`.
 
 ### Getting Help with Deployment
 
