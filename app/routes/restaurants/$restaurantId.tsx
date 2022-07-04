@@ -40,9 +40,9 @@ export default function RestaurantPage() {
 
   return (
     <main className="h-full flex">
-      <div className="max-w-sm h-full bg-white">
-        <h1 className="inline-block mx-5 mt-5 text-4xl">{restaurant.name}</h1>
-        <h5 className="inline-block mx-5 text-xl text-gray-500">{restaurant.location}</h5>
+      <div className="w-96 h-full bg-white">
+        <h1 className="block mx-5 mt-5 text-4xl">{restaurant.name}</h1>
+        <h5 className="block mx-5 text-xl text-gray-500">{restaurant.location}</h5>
         
         {/* Table selector only available to admins */}
         { user && (
